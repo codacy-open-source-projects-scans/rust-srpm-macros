@@ -1,0 +1,53 @@
+From a4223ff242c88ab57ae35e522a9e26409225def0 Mon Sep 17 00:00:00 2001
+From: Fabio Valentini <decathorpe@gmail.com>
+Date: Wed, 21 Aug 2024 18:55:48 +0200
+Subject: [PATCH] tests: adapt to slightly different macro expansion in RPM
+ 4.20
+
+---
+ tests/test_macros_cargo.py | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/tests/test_macros_cargo.py b/tests/test_macros_cargo.py
+index b40f6c7..ad39a0f 100644
+--- a/tests/test_macros_cargo.py
++++ b/tests/test_macros_cargo.py
+@@ -44,7 +44,7 @@ def test_cargo_prep(evaluater):
+     build_cflags = evaluater("%build_cflags")[0]
+     build_cxxflags = evaluater("%build_cxxflags")[0]
+     build_ldflags = evaluater("%build_ldflags")[0]
+-    buildroot = evaluater("%buildroot")[0]
++    buildroot = evaluater("%{buildroot}")[0]
+     prefix = evaluater("%_prefix")[0]
+     cargo_registry = evaluater("%cargo_registry")[0]
+     rustflags_opt_level = evaluater("%rustflags_opt_level")[0]
+@@ -108,7 +108,7 @@ def test_cargo_prep_vendor(evaluater):
+     build_cflags = evaluater("%build_cflags")[0]
+     build_cxxflags = evaluater("%build_cxxflags")[0]
+     build_ldflags = evaluater("%build_ldflags")[0]
+-    buildroot = evaluater("%buildroot")[0]
++    buildroot = evaluater("%{buildroot}")[0]
+     prefix = evaluater("%_prefix")[0]
+     rustflags_opt_level = evaluater("%rustflags_opt_level")[0]
+     rustflags_codegen_units = evaluater("%rustflags_codegen_units")[0]
+@@ -169,7 +169,7 @@ def test_cargo_prep_no_replacement(evaluater):
+     build_cflags = evaluater("%build_cflags")[0]
+     build_cxxflags = evaluater("%build_cxxflags")[0]
+     build_ldflags = evaluater("%build_ldflags")[0]
+-    buildroot = evaluater("%buildroot")[0]
++    buildroot = evaluater("%{buildroot}")[0]
+     prefix = evaluater("%_prefix")[0]
+     rustflags_opt_level = evaluater("%rustflags_opt_level")[0]
+     rustflags_codegen_units = evaluater("%rustflags_codegen_units")[0]
+@@ -284,7 +284,7 @@ def test_cargo_test_with_args(evaluater):
+ 
+ 
+ def test_cargo_install(evaluater):
+-    buildroot = evaluater("%buildroot")[0]
++    buildroot = evaluater("%{buildroot}")[0]
+     cargo = evaluater("%__cargo")[0]
+     cargo_common_opts = evaluater("%__cargo_common_opts")[0]
+     cargo_is_bin = evaluater("%__cargo_is_bin")[0]
+-- 
+2.46.0
+
